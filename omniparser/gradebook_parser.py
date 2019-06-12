@@ -1,6 +1,6 @@
 
 # omniparser/gradebook_parser.py
-
+import json
 import os
 import statistics
 
@@ -26,17 +26,41 @@ def calculate_average_grade_from_csv(my_csv_filepath):
     return avg_grade #90.64 #"OOPS"
 
 
+#if __name__ == "__main__":
+#    print("PARSING SOME EXAMPLE GRADEBOOK FILES HERE...")
+#
+#    gradebook_filepath = os.path.join(os.path.dirname(__file__), "..", "data", "gradebook_2019.csv")
+#    print(gradebook_filepath)
+#    
+#
+#    avg = calculate_average_grade_from_csv(gradebook_filepath)
+#    print(avg)
+
+def calculate_average_grade_from_json(x):
+    
+    with open(x, 'r') as f:
+        print(type(f))
+        file_contents = f.read()
+        print(type(file_contents))
+    gradebook = json.loads(file_contents)
+    print(gradebook , type(gradebook))
+    
+    students = gradebook['students']
+    grades =[s['finalGrade'] for s in students]
+    avg_grade = statistics.mean(grades)
+
+    return avg_grade
+
+
+
 if __name__ == "__main__":
     print("PARSING SOME EXAMPLE GRADEBOOK FILES HERE...")
 
-    gradebook_filepath = os.path.join(os.path.dirname(__file__), "..", "data", "gradebook_2019.csv")
+    gradebook_filepath = os.path.join(os.path.dirname(__file__), "..", "data", "gradebook_2018.json")
     print(gradebook_filepath)
-    
-
-    avg = calculate_average_grade_from_csv(gradebook_filepath)
+    print(os.path.isfile(gradebook_filepath))
+    avg = calculate_average_grade_from_json(gradebook_filepath)
     print(avg)
-
-
 
 
 
