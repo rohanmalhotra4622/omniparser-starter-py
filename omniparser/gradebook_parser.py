@@ -9,7 +9,7 @@ import pandas
 def calculate_average_grade_from_csv(my_csv_filepath):
     df = pandas.read_csv(my_csv_filepath)
 
-    breakpoint()
+    #breakpoint()
     #avg_grade = df[final_grade].mean()
 
     #rows = df.to_dict("records")
